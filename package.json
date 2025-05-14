@@ -49,6 +49,5 @@
   },
   "dependencies": {
     "spessasynth_core": "latest"
-    "build": "^0.1.4",
   }
 }
