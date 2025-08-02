@@ -67,3 +67,6 @@ $RECYCLE.BIN/
 /synthetizer/worklet_processor.min.js.map
 /spessasynth_lib.wiki/
 dist/
+synthetizer/
+*.tgz
+gh-pages/
