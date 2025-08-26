@@ -1,7 +1,7 @@
 # Sequencer Class
 This is the module
 that plays MIDI sequences
-using the [`Synthetizer` class](../synthesizer/index.md).
+using the [`WorkletSynthesizer` class](../synthesizer/basic-synthesizer.md).
 
 !!! Tip
 
@@ -14,8 +14,8 @@ const sequencer = new Sequencer(midiBuffers, synth, options);
 ```
 - `midiBuffers` - an array of the MIDI files to play. Either `MIDI` or objects with two properties: 
   - `binary`: the `ArrayBuffer` representation of the file. It can be mixed up.
-  - `altName` - alternative name of the sequence if it doesn't have one. It cn be undefined.
-- `synth` - the synthetizer to use. An instance of the [`Synthetizer` class](../synthesizer/index.md).
+  - `fileName` - alternative name of the sequence if it doesn't have one. It cn be undefined.
+- `synth` - the synthetizer to use. An instance of the [`WorkletSynthesizer` class](../synthesizer/basic-synthesizer.md).
 - `options` - an optional `Object` with options for the sequencer (all of them are optional as well as the object itself)
   - `skipToFirstNoteOn` - a `boolean` indicating if the sequencer should skip to the first note on. Defaults to `true`.
   - `autoPlay` - a `boolean` indicating if the first sequence supplied should start playing. Defaults to `true`.
@@ -31,7 +31,7 @@ const sequencer = new Sequencer(midiBuffers, synth, options);
 !!! Warning
 
     Due to the way the sequencer has been coded, 
-    only one sequencer can be used with a `Synthetizer` instance at once!
+    only one sequencer can be used with a `WorkletSynthesizer` instance at once!
     If this is something that you want to be fixed, feel free to open an issue.
 
 ## Methods
@@ -42,7 +42,7 @@ sequencer.loadNewSongList(midiBuffers, autoPlay = true);
 ```
 - midiBuffers - an array of the parsed MIDI files to play,  Either `MIDI` or objects (can be mixed up) with two properties: 
   - `binary` - the `ArrayBuffer` representation of the file.
-  - `altName` - alternative name of the sequence if it doesn't have one (like file name, for example). `string`, can be undefined.
+  - `fileName` - alternative name of the sequence if it doesn't have one (like file name, for example). `string`, can be undefined.
 - `autoPlay` - a `boolean` indicating if the first sequence supplied should start playing. Defaults to `true`.
 
 !!! Info
@@ -87,10 +87,10 @@ sequencer.setSongIndex(index);
 ```
 - index - number, the song index, zero-based.
 
-### connectMidiOutput
+### connectMIDIOutput
 Connect a given MIDI output port and play the sequence to it.
 ```js
-sequencer.connectMidiOutput(output);
+sequencer.connectMIDIOutput(output);
 ```
 - output - a [`MIDIOutput`](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API) object, the output port to play to.
 !!! Tip
@@ -196,13 +196,13 @@ Boolean that controls if the sequencer loops.
 sequencer.loop = false; // the playback will stop after reaching the end
 ```
 
-#### loopsRemaining
+#### loopCount
 The number of loops remaining until the loop is disabled.
  A value of `-1` means infinite looping.
  It will automatically decrease by one every loop.
  Defaults to `-1`.
 ```js
-sequencer.loopsRemaining = 2; // the sequencer will loop two times and then the loop will turn off
+sequencer.loopCount = 2; // the sequencer will loop two times and then the loop will turn off
 ```
 
 #### shuffleSongs
@@ -299,14 +299,14 @@ console.log(sequencer.songsAmount); // 3
 #### onTextEvent
 A callback function if defined. Will be called on a text event, like lyrics.
 ```js
-sequencer.onTextEvent = (messageData, messageType, lyricsIndex) => {
-    const text = new TextDecoder("utf-8").decode(messageData.buffer);
+sequencer.onTextEvent = (data, type, lyricsIndex) => {
+    const text = new TextDecoder("utf-8").decode(data.buffer);
     console.log("Text event:", text)
 }
 ```
 Parameters:
-- messageData - `Uint8Array`, the message's data (excluding the statusByte).
-- messageType - the [Status byte of the meta-message](https://www.recordingblogs.com/wiki/midi-meta-messages) 
+- data - `Uint8Array`, the message's data (excluding the statusByte).
+- type - the [Status byte of the meta-message](https://www.recordingblogs.com/wiki/midi-meta-messages) 
 useful for determining if the message is lyrics, or something else.
 - lyricsIndex - `number`, the index of the lyrics in the song (`midiData.lyrics` array).
 If the event is not lyrics, it will be -1.
