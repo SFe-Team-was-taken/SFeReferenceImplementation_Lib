@@ -35,9 +35,7 @@ const DEFAULT_SF2_WRITE_OPTIONS: WorkerSoundFont2WriteOptions = {
     writeExtendedLimits: true,
     compress: false,
     compressionQuality: 1.0,
-    decompress: false,
-    bankVersion: "sfe-4.0",
-    use64Bit: false
+    decompress: false
 };
 
 const DEFAULT_RMIDI_WRITE_OPTIONS: WorkerRMIDIWriteOptions = {
@@ -146,7 +144,7 @@ export class WorkerSynthesizer extends BasicSynthesizer {
     /**
      * Registers an audio worklet for the WorkerSynthesizer.
      * @param context The context to register the worklet for.
-     * @param maxQueueSize The maximum amount of 128-sample chunks to store in the worklet. Higher values result in less breakups but higher latency. Defaults to 20.
+     * @param maxQueueSize The maximum amount of 128-sample chunks to store in the worklet. Higher values result in less breakups but higher latency.
      */
     public static async registerPlaybackWorklet(
         context: BaseAudioContext,
