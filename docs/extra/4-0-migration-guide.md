@@ -6,14 +6,9 @@ It also includes a few breaking changes which were made to make the API more con
 
 This page documents all the breaking changes in spessasynth_lib.
 
-!!! Note
+!!! Tip
 
     Please report any innacurate or missing changes.
-    
-
-!!! Note
-
-    This is still in progress.
 
 ## Breaking changes
 
@@ -34,9 +29,9 @@ Renamed from `worklet_processor` since it may conflict with other libraries prov
 
 Removed, as you have to include the worklet file manually.
 
-## FancyChorus
+## ChorusProcessor
 
-Renamed to `ChorusConfig`.
+Renamed from `FancyChorus`.
 
 Now includes `connect`, `disconnect` and `update` methods and `config` property.
 
@@ -126,7 +121,7 @@ Removed in favor of `embeddedSoundBankSize` which will be undefined if it does n
 
 ### loadNewSongList
 
-`altName` property has been renamed to `fileName` as this is what it sets in `BasicMIDI`.
+`altName` property has been renamed to `fileName` as this is what it sets in [`BasicMIDI`](https://spessasus.github.io/spessasynth_core/midi/).
 
 ### loop
 

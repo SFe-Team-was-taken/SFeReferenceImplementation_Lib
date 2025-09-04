@@ -16,10 +16,19 @@ hide:
 ## spessasynth_lib documentation
 
 - [Getting started with spessasynth_lib](getting-started/index.md)
-- [WorkletSynthesizer](synthesizer/basic-synthesizer.md) - Responsible for generating sound.
+- [WorkletSynthesizer](synthesizer/worklet-synthesizer.md) - Responsible for generating sound using AudioWorklets.
+- [WorkerSynthesizer](synthesizer/worker-synthesizer.md) - Responsible for generating sound using Web Workers..
 - [Sequencer](sequencer/index.md) - Responsible for playing the parsed MIDI sequence.
 - [Writing Wave files](writing-files/writing-wav-files.md) - How to write WAV files from `AudioBuffer`.
 - [NPM Exports](extra/all-npm-exports.md) - a listing of all the NPN exports in the `spessasynth_lib` NPM package.
+
+!!! Warning
+
+    This wiki only describes the WebAudio API wrappers that spesasynth_lib itself provides.
+    Most of the types (such as `BasicMIDI`, `BasicSoundbank` and more) are documented in [spessasynth_core documentation](https://spessasus.github.io/spessasynth_core/).
+    
+    If what you're looking for isn't in this wiki, it's probably there.
+
 
 ## Extra info
 
