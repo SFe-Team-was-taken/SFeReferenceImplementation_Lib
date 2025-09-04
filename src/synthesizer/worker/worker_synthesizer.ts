@@ -35,7 +35,9 @@ const DEFAULT_SF2_WRITE_OPTIONS: WorkerSoundFont2WriteOptions = {
     writeExtendedLimits: true,
     compress: false,
     compressionQuality: 1.0,
-    decompress: false
+    decompress: false,
+    bankVersion: "sfe-4.0",
+    use64Bit: false
 };
 
 const DEFAULT_RMIDI_WRITE_OPTIONS: WorkerRMIDIWriteOptions = {
